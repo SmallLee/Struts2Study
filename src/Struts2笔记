@@ -1,0 +1,14 @@
+1.通配符*只能使用两种方法
+a:*.后缀名
+b:以/开头，已/*结尾  /action/*
+
+2.使用Filter作为控制器的好处
+    可以方便的在应用程序里对所有资源(包括静态资源)进行控制访问
+3.在使用jsp:useBean时，系统会默认调用JavaBean的无参构造函数
+<jsp:useBean id="product" class="pojo.Product" scope="request"/>等同于下面的代码
+Product product = new Product();//id代表类创建的实例对象
+request.setAttribute("product",product)
+
+4.ERROR StatusLogger No log4j2 configuration file found是因为log4j2的配置文件没有导入，放入src下就可以了
+
+5.Cannot resolve Struts Package

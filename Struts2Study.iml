@@ -12,6 +12,12 @@
       </configuration>
       <facet type="Struts2" name="Struts 2">
         <configuration>
+          <fileset id="s2fileset2" name="My Fileset " removed="false">
+            <file>jar://$MODULE_DIR$/web/WEB-INF/lib/struts2-core.jar!/struts-default.xml</file>
+          </fileset>
+          <fileset id="s2fileset" name="My Fileset 2" removed="false">
+            <file>file://$MODULE_DIR$/src/struts.xml</file>
+          </fileset>
           <propertiesKeys disabled="false" />
         </configuration>
       </facet>
@@ -24,6 +30,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Struts 2-2.5.13" level="project" />
+    <orderEntry type="library" name="commons-fileupload" level="project" />
+    <orderEntry type="library" name="log4j-api-2.8.2" level="project" />
   </component>
 </module>

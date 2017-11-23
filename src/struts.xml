@@ -5,4 +5,12 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
+    <package name="helloworld" extends="struts-default">
+        <action name="product-input">
+            <result>/WEB-INF/pages/input.jsp</result>
+        </action>
+        <action name="product-save" class="pojo.Product" method="save">
+            <result name="detail">/WEB-INF/pages/detail.jsp</result>
+        </action>
+    </package>
 </struts>
