@@ -5,12 +5,31 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
-    <package name="helloworld" extends="struts-default">
-        <action name="product-input">
-            <result>/WEB-INF/pages/input.jsp</result>
+    <!--
+        package:struts2使用包来组织模块
+        name:用于其他的包来引用当前包,一般代表模块的名字
+        extends:当前包继承哪个包，可以继承被继承包中所有的配置，通常继承struts-default
+        namespace:默认值是/,若指定了一个非默认值，则访问action时需要加上namespace，具体格式如下
+        http://localhost:8080/contextpath/namespace/actionname.action
+
+    -->
+    <package name="helloworld" extends="struts-default" namespace="/">
+        <!--
+        一个action就是一个struts2的请求
+        name:对应struts2请求的名字(ServletPath去掉/和后缀名)
+        result；请求到达的页面
+
+        action默认的class是ActionSupport,method是execute
+        result的name默认是success,,表示action后的执行结果，所以一个action可能有几个result子节点，多个result
+        子节点使用name属性区分
+        name；标识一个result，和action方法的返回值对应，默认success
+        type:处理结果的类型，默认为dispatcher
+        -->
+        <action name="product-input" class="com.opensymphony.xwork2.ActionSupport" method="execute">
+            <result name="success" type="dispatcher">/WEB-INF/pages/input.jsp</result>
         </action>
         <action name="product-save" class="pojo.Product" method="save">
-            <result name="detail">/WEB-INF/pages/detail.jsp</result>
+            <result name="detail">/WEB-INF/pages/details.jsp</result>
         </action>
     </package>
 </struts>

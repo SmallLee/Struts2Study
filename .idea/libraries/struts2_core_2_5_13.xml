@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="struts2-core-2.5.13">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-core-2.5.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-core-2.5.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-core-2.5.13.jar!/" />
+    </SOURCES>
+  </library>
+</component>

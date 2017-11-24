@@ -12,3 +12,5 @@ request.setAttribute("product",product)
 4.ERROR StatusLogger No log4j2 configuration file found是因为log4j2的配置文件没有导入，放入src下就可以了
 
 5.Cannot resolve Struts Package
+http://blog.csdn.net/small_lee/article/details/78621909
+6.为了安全，WEB-INF  下面的jsp 是不能直接访问的，也就是说不能重定向到WEB-INF目录下的页面
