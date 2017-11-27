@@ -13,6 +13,7 @@
         http://localhost:8080/contextpath/namespace/actionname.action
 
     -->
+    <constant name="struts.action.extension" value="action,do,,"/>
     <package name="helloworld" extends="struts-default" namespace="/">
         <!--
         一个action就是一个struts2的请求
@@ -30,6 +31,9 @@
         </action>
         <action name="product-save" class="pojo.Product" method="save">
             <result name="detail">/WEB-INF/pages/details.jsp</result>
+        </action>
+        <action name="test" class="pojo.Product" method="test">
+            <result>/index.jsp</result>
         </action>
     </package>
 </struts>

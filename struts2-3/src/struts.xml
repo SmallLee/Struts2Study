@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.action.extension" value="action,do,,"/>
+    <package name="default" extends="struts-default">
+        <action name="TestActionContext" class="action.TestActionContext" method="execute">
+            <result>/test-actionContext.jsp</result>
+        </action>
+        <action name="TestAware" class="action.TestAwareAction" method="execute">
+            <result>/test-awareaction.jsp</result>
+        </action>
+        <action name="TestServletActionContext" class="action.TestServletActionContext" method="execute">
+            <result>/test-awareaction.jsp</result>
+        </action>
+    </package>
+</struts>

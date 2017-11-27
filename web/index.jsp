@@ -4,6 +4,7 @@
     <title>$Title$</title>
   </head>
   <body>
-  <a href="product-input.action">Product Input</a>
+  <a href="product-input.action">Product Input</a><br>
+  <a href="test">Test</a>
   </body>
 </html>

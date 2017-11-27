@@ -43,6 +43,11 @@ public class Product {
         return "detail";
     }
 
+    public String test(){
+        System.out.println("test");
+        return "success";
+    }
+
     @Override
     public String toString() {
         return "Product{" +

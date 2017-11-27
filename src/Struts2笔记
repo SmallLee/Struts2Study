@@ -14,3 +14,29 @@ request.setAttribute("product",product)
 5.Cannot resolve Struts Package
 http://blog.csdn.net/small_lee/article/details/78621909
 6.为了安全，WEB-INF  下面的jsp 是不能直接访问的，也就是说不能重定向到WEB-INF目录下的页面
+
+7.搭建Struts2开发环境
+    a：加入jar包
+    b:在web.xml中配置过滤器
+    c:在类目录下假如Struts2的配置文件struts.xml
+
+8.action 和Action类
+    action：代表一个struts2的请求
+    Action类：能够处理Struts2请求的类
+        属性的名字必须和JavaBean的命名规则相同
+        属性的类型可以是任意类型，从字符串到非字符串之间的转化可以自动进行
+        必须有一个不带参数的构造函数(在配置文件中要通过反射调用)
+        至少有一个供struts2在执行这个action时调用的方法
+        同一个Action类可以包含多个action方法
+        Structs2会为每一个HTTP请求创建一个Action实例
+9.如何访问WEB资源
+    与ServletAPI解耦的方式：只能访问有限的ServletAPI,且只能访问其有限的方法
+        >使用ActionContexxt
+        >实现xxxaWare接口
+        >若一个Action类中有多个action方法，且多个方法都需要使用域对象的map或者parameters，则建议
+        使用实现Aware接口的方法
+    与ServletAPI耦合的方式，可以访问更多的方法
+        >使用ServletActionContext
+        >实现ServletxxxAware方法
+
+10.Action类的setter方法要和请求参数的name对应
