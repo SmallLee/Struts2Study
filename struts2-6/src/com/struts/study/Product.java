@@ -1,6 +1,5 @@
 package com.struts.study;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import org.apache.struts2.interceptor.RequestAware;
@@ -48,18 +47,11 @@ public class Product implements RequestAware,SessionAware{
 
     public String save(){
         System.out.println("detail " + this);
-        //获取值栈
-        ValueStack valueStack = ActionContext.getContext().getValueStack();
         sessionMap.put("product",this);
+        int a = 1/0;
         return "success";
     }
-    public String testTag(){
-        System.out.println("===========testTag");
-        this.productDesc= "测试标签";
-        this.productPrice = "333";
-        this.productName = "标签";
-        return "success";
-    }
+
     @Override
     public String toString() {
         return "Product{" +

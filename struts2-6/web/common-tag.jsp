@@ -1,6 +1,7 @@
 <%@ page import="com.struts.study.Person" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.struts.study.ComparablePerson" %><%--
   Created by IntelliJ IDEA.
   User: zxy
   Date: 2017/12/4
@@ -9,6 +10,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="d" uri="/struts-tags"  %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
     <title>Title</title>
@@ -82,6 +84,21 @@
             ${name} -- ${age}
         </d:iterator>
     <br>
+    <%
+        ComparablePerson cp = new ComparablePerson();
+        request.setAttribute("comparator",cp);
+    %>
+    <d:sort comparator="#request.comparator" source="persons" var="cp"/>
+    <d:iterator value="#attr.cp">
+        ${name}--${age}
+    </d:iterator>
     <br>
+    <d:date name="#session.date" format="yyyy-MM-dd" var="dd"/>
+        ${dd}
+    <br>
+    <s:iterator value="persons">
+        <d:a href="getPerson.action?name=%{name}">${name}</d:a>
+    </s:iterator> <br>
+
 </body>
 </html>

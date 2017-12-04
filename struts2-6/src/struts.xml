@@ -5,8 +5,11 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
     <package name="hello" extends="struts-default">
-        <action name="testTag" class="com.struts.study.Product" method="testTag">
-            <result>/common-tag.jsp</result>
+        <!--<action name="testTag" class="com.struts.study.Product" method="testTag">-->
+            <!--<result>/common-tag.jsp</result>-->
+        <!--</action>-->
+        <action name="save" class="com.struts.study.UserAction" method="save">
+            <result name="input">/form-tag.jsp</result>
         </action>
     </package>
 </struts>
