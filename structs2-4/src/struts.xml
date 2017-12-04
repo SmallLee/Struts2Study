@@ -7,13 +7,39 @@
     
     <package name="login" extends="struts-default">
         <action name="login-ui">
-            <result>/login.jsp</result>
+            <result >/login.jsp</result>
         </action>
         <action name="log-in" class="action.UserAction">
             <result name="login-success">/login-success.jsp</result>
         </action>
         <action name="log-out"  method="logout" class="action.UserAction">
             <result name="logout">/login.jsp</result>
+        </action>
+        <action name="testResult" class="action.TestResultAction">
+            <result name="success">/login-success.jsp</result>
+            <!--重定向到一个action-->
+            <result name="error" type="redirectAction">
+                <param name="actionName">testAction</param>
+                <param name="namespace">/atguigu</param>
+            </result>
+            
+            <result name="login">/login.jsp</result>
+        </action>
+        <!--通配符-->
+        <action name="UserAction-save" class="action.UserAction2" method="save">
+            <result name="save-success">/error.jsp</result>
+        </action>
+        <action name="UserAction-delete" class="action.UserAction2" method="delete">
+            <result name="delete-success">/error.jsp</result>
+        </action>
+        <action name="UserAction-update" class="action.UserAction2" method="update">
+            <result name="update-success">/error.jsp</result>
+        </action>
+
+    </package>
+    <package name="testpackage" namespace="/atguigu" extends="struts-default">
+        <action name="testAction" class="action.TestAction">
+            <result>/login-success.jsp</result>
         </action>
     </package>
 </struts>

@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/Struts2Study.iml" filepath="$PROJECT_DIR$/Struts2Study.iml" />
       <module fileurl="file://$PROJECT_DIR$/structs2-4/structs2-4.iml" filepath="$PROJECT_DIR$/structs2-4/structs2-4.iml" />
       <module fileurl="file://$PROJECT_DIR$/struts2-3/struts2-3.iml" filepath="$PROJECT_DIR$/struts2-3/struts2-3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/struts2-5/struts2-5.iml" filepath="$PROJECT_DIR$/struts2-5/struts2-5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/struts2-6/struts2-6.iml" filepath="$PROJECT_DIR$/struts2-6/struts2-6.iml" />
     </modules>
   </component>
 </project>

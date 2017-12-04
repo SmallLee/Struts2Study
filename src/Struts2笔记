@@ -40,3 +40,74 @@ http://blog.csdn.net/small_lee/article/details/78621909
         >实现ServletxxxAware方法
 
 10.Action类的setter方法要和请求参数的name对应
+11.配置action时，如果不指定class属性，默认的Action类是com.opensymphony.xwork2.ActionSupport,
+执行的方法是execute
+
+12.在手工完成字段验证，显示错误信息，国际化等情况下，推荐继承ActionSupport
+
+13.result是action的子节点，result代表action执行后可能去的目的地，一个action节点可以配置多个子节点
+result的name属性对应着action方法有可能的一个返回值,success,error,login,input
+
+14.result还有一个type属性，表示结果的响应类型，默认是dispatcher
+    >dispatcher
+    >redirect
+    >redirectAction:重定向到一个Action
+    >chain:转发到一个Action
+
+    通过redirect的功能也能实现重定向到一个Action的功能
+    不能通过type=dispatcher的方式转发到一个Action
+
+15.通配符映射匹配规则
+    a:若找到多个匹配，没有通配符的那个胜出
+    b:若指定的动作不存在，Struts2会尝试把这个URI与任何一个包含着*的动作进行匹配
+    c:被匹配到的子串可以使用{1}{2}代替
+    d:{0}匹配整个url
+    e：若找到的通配符不止一个，则按照先后顺序
+    f:*不能匹配/，若想匹配/,是哟哦那个**
+
+  16.在ServletPath后面加上叹号，然后跟上方法名，表示要动态调用的方法
+
+  17.OGNL(Object-Graph Navagation Language)
+    ValueStack值栈
+    可以从ActiionContext中获取值栈
+    值栈分为两个逻辑部分：
+        >Map栈：实际上是OgnlContext类型，是个map，也是对ActionContext的一个引用，里面保存着各种
+        map，requestMap,sessionMap
+        >对象栈：实际上是CompoundRoot类型，是一个使用ArrayList定义的栈，里面保存着和Action实例相关的对象
+        在JSP页面上可以利用Ognl访问到值栈里的对象属性
+
+   18.默认情况下，Action对象会自动的放到值栈的栈顶
+
+   19.Struts2利用s:property标签和OGNL表达式来读取值栈中的属性值
+    值栈中的内容
+        >对于对象栈：对象栈中某一个对象的属性值
+            object.propertyName
+            object['propertyName']
+            object["propertyName"]
+        >对于Map栈:request,session,application的一个属性值或者一个请求参数的值
+            <s:property value="#session.product.productName"/>
+   20.使用el访问值栈中对象的属性
+    <s:property value="fieldName"/>也可以使用el
+    ${fieldName}
+
+    原理：Struts2将HtppServletRequest包装为StrutsRequestWrapper,然后将这个对象
+    传到页面上，而这个类重写了getAttribute方法，这个方法会自动的去值栈里获取属性值
+    用el肯定能用ognl，反过来不行
+
+    21.声明式异常处理
+        声明式异常处理机制由ExceptionMappingInterceptor拦截器负责处理，当异常被捕获时，就会向ValueStack中放两个
+        对象：
+        exception
+        exceptionStack
+
+        值栈的类型是OgnlValueStack,值栈里面是root和context对象，root是CompoundRoot对象，存放对象
+        context是OgnlContext对象，存放各种map
+
+    22.Struts自动把Action对象放入到值栈中，
+
+    23.url标签中的value属性会自动对OGNL解析，不希望解析的话，可以把value中的值加双引号
+
+    24.s:set用来向page,session,request,application中加入一个属性值
+        s:push 标签开始时把对象压入值栈，标签结束后弹出
+       s:iterator
+        遍历集合，把这个可遍历对象里的每一个元素一次压入和弹出

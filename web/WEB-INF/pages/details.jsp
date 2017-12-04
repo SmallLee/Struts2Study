@@ -26,8 +26,11 @@
     <%--<jsp:setProperty name="product" property="productName" value="${requestScope.product.productName}"/>--%>
     <%--<jsp:getProperty name="product" property="productName"/>--%>
 <%--使用struts2--%>
+    productName:<%=request.getAttribute("productName")%>
     ${productName}<br>
     ${productDesc}<br>
     ${productPrice}<br>
+
+    <%=request%>
 </body>
 </html>

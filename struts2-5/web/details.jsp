@@ -31,6 +31,18 @@
     ${productName}<br>
     ${productDesc}<br>
     ${productPrice}<br>
-    productPrice : <s:property value="[0].productPrice"/>
+    productPrice : <s:property value="[0].productPrice"/><br>
+
+    productName1：${sessionScope.product.productName}
+    <s:property value="#session.product.productName"/>
+    productName2: ${requestScope.test.productDesc}
+    <s:property value="#request.test.productDesc"/>
+    <%--使用Ognl调用类的静态字段和方法--%>
+    <s:property value="@java.lang.Math@PI"/>
+    <s:property value="@java.lang.Math@cos(0)"/>
+<%--调用对象栈的方法为一个属性赋值--%>
+        <s:property value="setProductName('ognl')"/>
+    <%--从栈顶对象找productName，--%>
+    productPrice : <s:property value="productName"/><br>
 </body>
 </html>

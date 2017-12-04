@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <!--打开静态方法可以访问的开关，默认不允许访问-->
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+    <package name="valuestack" extends="struts-default">
+        <!--配置全局异常-->
+        <!--<global-results>-->
+            <!--<result></result>-->
+        <!--</global-results>-->
+        <!--<global-exception-mappings>-->
+            <!--<exception-mapping exception="" result=""></exception-mapping>-->
+        <!--</global-exception-mappings>-->
+
+        <action name="product-input" class="com.struts.valuestack.Product"  method="save">
+            <result>/input.jsp</result>
+            <exception-mapping exception="java.lang.ArithmeticException" result="input"/>
+            <result name="input">/input.jsp</result>
+        </action>
+        <action name="product-save" class="com.struts.valuestack.Product" method="save">
+            <result>/details.jsp</result>
+        </action>
+    </package>
+</struts>
