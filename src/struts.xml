@@ -13,7 +13,9 @@
         http://localhost:8080/contextpath/namespace/actionname.action
 
     -->
+    <!--指定扩展名-->
     <constant name="struts.action.extension" value="action,do,,"/>
+    <constant name="struts.ui.theme" value="simple"/>
     <package name="helloworld" extends="struts-default" namespace="/">
         <!--
         一个action就是一个struts2的请求

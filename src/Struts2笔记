@@ -120,3 +120,58 @@ result的name属性对应着action方法有可能的一个返回值,success,erro
     26.当包含着一个复选框的表单被提交时，如果某个复选框被选中，他的值将为true，这个复选框在
     http请求里增加一个参数，但如果复选框未被选中，则在请求中不会增加参数
     Struts2为了解决这个局限性，解决办法是为复选框创建一个不可见的匹配字段
+
+    27.Struts主题
+        指定Struts2主题的三种方式(默认主题是xhtml)
+        局部标签属性配置，
+        在域对象里设置属性
+        在全局struts.xml文件中配置
+        <constant name="struts.ui.theme" value="simple"/>
+    28.ArrayList的构造函数可以接收一个Collection集合
+
+    29.result中的type="redirectAction" 可以重定向到struts.xml中配置的其他action
+    LinkedHashMap保存了记录的插入顺序，在用Iterator遍历LinkedHashMap时，先得到的记录肯定是先插入的。
+
+    30.Struts2运行流程
+        ActionProxy是Action的一个代理类，也就是说Action的调用是通过ActionProxy实现的，其实就是调用了
+        ActionProxy的execute方法，而该方法又调用了ActionInvocation的invoke方法
+        ActionInvocation就是Action的调用者，在Action的执行过程中，负责interceptor,Action,result等一系列元素的
+        调度
+    31.从2.5开始，Struts2默认只能定义这些方法名
+     <global-allowed-methods>execute,input,back,cancel,browse,save,delete,list,index</global-allowed-methods>
+     如果我们需要自定义方法名，需要按照下面的步骤
+     1.修改DOCTYPE定义，都改为2.5
+     <!DOCTYPE struts PUBLIC
+             "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+             "http://struts.apache.org/dtds/struts-2.5.dtd">
+     2.配置允许使用的方法名，有两种配置方法，全局和局部配置
+     全局配置,在package之间配置
+     <global-allowed-methods>regex:.*</global-allowed-methods>
+     局部配置
+         <allowed-methods>add</allowed-methods>
+         注意：元素的配置要遵循下面的顺序param|result|interceptor-ref|exception-mapping，否则会抛出异常
+
+        元素类型为 "action" 的内容必须匹配 "((param|result|interceptor-ref|exception-mapping)*,allowed-methods?)
+
+     32.实现ModelDriven接口后的执行流程，
+     1)
+            public String intercept(ActionInvocation invocation) throws Exception {
+                    Object action = invocation.getAction();
+                    if (action instanceof ModelDriven) {
+                        ModelDriven modelDriven = (ModelDriven)action;
+                        ValueStack stack = invocation.getStack();
+                        //把getModel方法返回的对象放入到值栈，其实就是EmployeeAction中的Employee成员变量
+                        Object model = modelDriven.getModel();
+                        if (model != null) {
+                            stack.push(model);
+                        }
+
+                        if (this.refreshModelBeforeResult) {
+                            invocation.addPreResultListener(new ModelDrivenInterceptor.RefreshModelBeforeResult(modelDriven, model));
+                        }
+                    }
+
+                    return invocation.invoke();
+                }
+       2)执行ParametersInterceptor的doIntercept方法，把请求参数的值赋值给栈顶对象的属性，若栈顶对象没有对应的属性
+       则查询下一个对象的属性
