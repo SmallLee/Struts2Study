@@ -7,10 +7,10 @@ public class Dao {
 
     static {
         emps.put(1001,new Employee(1001,"AA","aa","a.com"));
-        emps.put(1003,new Employee(1002,"BB","bb","b.com"));
+        emps.put(1002,new Employee(1002,"BB","bb","b.com"));
         emps.put(1004,new Employee(1004,"CC","cc","c.com"));
-        emps.put(1006,new Employee(1005,"CC","cc","c.com"));
-        emps.put(1005,new Employee(1006,"CC","cc","c.com"));
+        emps.put(1005,new Employee(1005,"CC","cc","c.com"));
+        emps.put(1006,new Employee(1006,"CC","cc","c.com"));
     }
     public List<Employee> getAllEmployees(){
         return new ArrayList<Employee>(emps.values());

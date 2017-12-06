@@ -6,12 +6,16 @@
 
 <struts>
     <package name="emp" extends="struts-default">
+        <!--指定默认的拦截器-->
+      <default-interceptor-ref name="paramsPrepareParamsStack"/>
         <!--<global-allowed-methods>regex:.*</global-allowed-methods>-->
         <action name="emp-*" method="{1}" class="com.study.employ.EmployeeAction">
             <result name="{1}">/emp-{1}.jsp</result>
             <result name="delete" type="redirectAction">emp-list</result>
             <result name="add" type="redirectAction">emp-list</result>
-            <allowed-methods>add</allowed-methods>
+            <result name="edit">/emp-edit.jsp</result>
+            <result name="update" type="redirectAction">emp-list</result>
+            <allowed-methods>add,edit,update</allowed-methods>
         </action>
     </package>
 </struts>

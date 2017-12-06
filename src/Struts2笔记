@@ -175,3 +175,4 @@ result的name属性对应着action方法有可能的一个返回值,success,erro
                 }
        2)执行ParametersInterceptor的doIntercept方法，把请求参数的值赋值给栈顶对象的属性，若栈顶对象没有对应的属性
        则查询下一个对象的属性
+  33.ParametersIntercept方法会把请求参数赋值给栈顶对象的属性
