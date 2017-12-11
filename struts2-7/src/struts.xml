@@ -6,8 +6,15 @@
 
 <struts>
     <package name="emp" extends="struts-default">
+        <interceptors>
+            <interceptor-stack name="atguigu">
+                <interceptor-ref name="paramsPrepareParamsStack">
+                    <param name="prepare.alwaysInvokePrepare">false</param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
         <!--指定默认的拦截器-->
-      <default-interceptor-ref name="paramsPrepareParamsStack"/>
+      <default-interceptor-ref name="atguigu" />
         <!--<global-allowed-methods>regex:.*</global-allowed-methods>-->
         <action name="emp-*" method="{1}" class="com.study.employ.EmployeeAction">
             <result name="{1}">/emp-{1}.jsp</result>

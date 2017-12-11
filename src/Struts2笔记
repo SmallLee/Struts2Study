@@ -176,3 +176,43 @@ result的name属性对应着action方法有可能的一个返回值,success,erro
        2)执行ParametersInterceptor的doIntercept方法，把请求参数的值赋值给栈顶对象的属性，若栈顶对象没有对应的属性
        则查询下一个对象的属性
   33.ParametersIntercept方法会把请求参数赋值给栈顶对象的属性
+
+
+  3）使用paramsPrepareParamsStack可以在对象加入到值栈之前获得请求参数的值，
+  默认的拦截器栈是defaultStack，可以在配置文件中修改默认的拦截器栈
+  所以可以先把请求参数赋值给Action类对应的属性，再根据赋给Action的那个属性值决定压入栈顶
+  的对象，最后再为栈顶对象赋值
+
+    对于edit操作而言：
+        1，先为Employee的id赋值
+        2.根据id从数据库中加载对象，然后放入栈顶
+        3.再为栈顶Employee对象的id属性赋值(实际上此时栈顶Employee的id属性已经有值了)
+        4.把栈顶对象的属性回显在表单中
+
+   4.问题
+    在执行删除的时候，id不为空，但getModel方法却从数据库加载了一个对性爱那个
+    查询全部信息时，也new了一个对象，浪费
+
+    5.
+    <default-interceptor-ref name="paramsPrepareParamsStack"/>
+    若Action实现了Preparable接口，则Struts2会执行prepare[ActionMethodName]方法，或者执行
+    然后根据prepareDo[ActionMethodName],先调用那个取决于firstCallPrepareDo这个属性，默认是false,
+    alwaysInvokePrepare判断是否要调用prepare方法，我们可以在Action类中加上prepare[ActionMethodName]方法
+    ，同时不让prepare方法执行
+
+    如何在配置文件中对拦截器的属性赋值
+
+     <interceptors>
+                //拦截器名称
+                <interceptor-stack name="atguigu">
+                    //名称对应的拦截器类
+                    <interceptor-ref name="paramsPrepareParamsStack">
+                        //拦截器属性
+                        <param name="prepare.alwaysInvokePrepare">false</param>
+                    </interceptor-ref>
+                </interceptor-stack>
+            </interceptors>
+            <!--指定默认的拦截器，name属性的值是我们自定义的拦截器名称-->
+          <default-interceptor-ref name="atguigu" />
+
+

@@ -1,0 +1,17 @@
+1.对象栈里的对象可以用一个从[0]开始的下标表示，[0]表示栈顶对象
+
+    如何覆盖默认的错误信息
+            在当前Action类所在的包下新建一个Action名称.properties文件，
+            invalid.fieldvalue.age=error age
+    在主题为simple的情况下，错误信息是不会显示的，解决办法是获取栈顶Action对象的fieldErrors属性的值
+    可以通过<s:fielderror name="age"/>或者ognl获取
+
+    若是simple主题，且使用<s:fielderror name="age"/>，如何去除标签的ul和li
+    在scr下新建template.simple包，把Struts2包中的fielderror.ftl复制到此目录中，取出ul和li
+
+    在simple主题下，才使用<s:fielderror name="age"/>，因为默认主题下Struts2会给我们提示，不需要
+    显示定义
+
+    定制类型转换器
+        
+

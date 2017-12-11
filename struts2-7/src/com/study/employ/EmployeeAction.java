@@ -3,6 +3,7 @@ package com.study.employ;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 import com.opensymphony.xwork2.util.ValueStack;
 import org.apache.struts2.dispatcher.HttpParameters;
 import org.apache.struts2.dispatcher.Parameter;
@@ -13,7 +14,7 @@ import org.apache.struts2.interceptor.RequestAware;
 import javax.print.DocFlavor;
 import java.util.Map;
 
-public class EmployeeAction implements RequestAware,ModelDriven<Employee>{
+public class EmployeeAction implements RequestAware,ModelDriven<Employee>,Preparable {
 
     private Map<String,Object> requestMap;
     private Dao dao = new Dao();
@@ -31,7 +32,7 @@ public class EmployeeAction implements RequestAware,ModelDriven<Employee>{
     }
 
     public String delete(){
-        dao.delete(employee.getId());
+        dao.delete(id);
         return "delete";
     }
 
@@ -41,9 +42,19 @@ public class EmployeeAction implements RequestAware,ModelDriven<Employee>{
         return "add";
     }
 
+    public void prepareAdd(){
+        System.out.println("===========prepareAdd");
+        employee = new Employee();
+    }
+
     public String update(){
         dao.update(employee);
         return "update";
+    }
+
+    public void prepareUpdate(){
+        System.out.println("========prepareUpdate");
+        employee = new Employee();
     }
     public String edit(){
 //        System.out.println("edit"+employee.getId());
@@ -59,6 +70,11 @@ public class EmployeeAction implements RequestAware,ModelDriven<Employee>{
         //手动的把数据库获取的对象放入到值栈栈顶，但是这样值栈中会多出一个对象
 //        ActionContext.getContext().getValueStack().push(dao.getEmployee(employee.getId()));
         return "edit";
+    }
+
+    public void prepareEdit(){
+        System.out.println("=====prepareEdit");
+        employee = dao.getEmployee(id);
     }
 
     @Override
@@ -79,11 +95,20 @@ public class EmployeeAction implements RequestAware,ModelDriven<Employee>{
         //若通过id来判断，则首先要保证能获取到id，而默认的parametersInterceptro实在modelDriven之后的，
         //所以我们不能使用默认的拦截器，而这可以通过paramsPrepareParamsStack实现，需要在struts.xml文件中配置
         ValueStack valueStack = ActionContext.getContext().getValueStack();
-        if (id == null) {
-            employee = new Employee();
-        } else {
-            employee = dao.getEmployee(id);
-        }
+//        if (id == null) {
+//            employee = new Employee();
+//        } else {
+//            employee = dao.getEmployee(id);
+//        }
         return employee;
+    }
+
+    /**
+     * prepare方法的主要作用是为getModel方法准备model的
+     * @throws Exception
+     */
+    @Override
+    public void prepare() throws Exception {
+        System.out.println("=========prepare");
     }
 }
