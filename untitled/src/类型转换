@@ -1,5 +1,10 @@
 1.对象栈里的对象可以用一个从[0]开始的下标表示，[0]表示栈顶对象
 
+    类型转化错误
+        若Action没有实现ValidationAware接口，Struts在遇到类型转化错误时仍然会调用action方法，好像什么都没发生
+        若实现了，类型转化错误时不在继续调用Action方法，Struts将检查相关action元素的声明是否包含一个
+        name=input的result,如果有，会把控制权交给那个result元素，否则会抛出一个异常
+
     如何覆盖默认的错误信息
             在当前Action类所在的包下新建一个Action名称.properties文件，
             invalid.fieldvalue.age=error age
@@ -13,5 +18,20 @@
     显示定义
 
     定制类型转换器
-        
-
+        Struts2不能自动完成字符串到引用类型的转化，所以要定制类型转化器
+        对于基本数据类型和String类型来说，struts2可以完美的完成转换类型的功能。
+        对于Date类型来说，必须限制date类型输入的是yyyy-MM-dd 格式才可以成功转换，否则会报错。
+        如何定制
+            I.扩展StrutsTypeConvertor类
+            II.配置
+                基于字段的配置
+                    在Action类所在包下新建Action类名-conversion-properties文件
+                    ，键入键值对：字段名-转换器全名
+                    第一次使用该转化器时创建实例
+                    转化器是单实例的
+                基于类型的配置
+                    在src下新建xwork-conversion.properties
+                    键入：待转化的类型全名--转换器全名
+                    当前Struts应用被加载时创建实例
+                    不是单实例的
+                类型转化器是单实例的

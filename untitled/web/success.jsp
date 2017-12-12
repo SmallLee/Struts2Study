@@ -16,6 +16,7 @@
     <h3>SuccessPage</h3>
     <s:property value="age"/>
     ${age}
+${date}
 <%=request.getAttribute("age")%>
 </body>
 </html>
