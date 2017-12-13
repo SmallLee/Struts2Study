@@ -1,0 +1,43 @@
+Struts2的验证
+    I.声明式验证
+        对Action或者Model的那个字段进行验证
+        使用什么验证规则
+        如果验证失败，转向什么页面，显示什么消息
+    II.编程式验证
+
+
+
+    声明式验证的helloworld
+        在Action类所在的包下编写配置文件，Action类名-validation.xml
+        若验证失败，需要配置name=input的result
+         <result name="input">/index.jsp</result>
+         如何显示错误消息
+            若是非simple主题，自动显示错误消息
+            simple主题，  可以使用<s:fielderror name="age"/>或者el表达式${fieldErrors.age[0]}
+
+    声明式验证非为
+        字段验证和非字段验证
+            若一个Action类的action使用相同的验证规则：
+            ActionClassName-validation.xml
+            若多个action使用不同的验证规则：
+             ActionClassName-alias-validation.xml
+
+     若一个Action类可以应答多个action请求，多个action请求使用不同的验证规则，怎么办
+     >为每一个action请求定义其对应的验证文件，都得起别名
+     >不带别名的配置文件依然会起作用，可以把action共用的验证规则配置在其中，但是注意，只适用于某一个
+     action的请求就不要配置在这里了。
+
+    声明式验证框架的原理：
+        Struts2默认的拦截器栈中提供了一个validation拦截器
+        >每个具体的验证规则会对应一个具体的验证器，有一个配置文件把验证规则名和验证器关联起来了，而实际上
+        该文件位于com.opensymphony.xwork2.validator.validators下的default.xml文件
+
+    5.短路验证，若多一个字段使用多个验证器，默认情况下会执行所有的验证器，若希望前面的验证不通过的话，
+    不执行后面的，可以在文件中配置
+    <field-validator type="conversion" short-circuit="true">
+                    <message>类型转换错误</message>
+                </field-validator>
+    6.若类型转化失败，默认还会执行后面的拦截器，还会进行验证，可以通过修改ConversionErrorInterceptor的源代码，
+    当类型转化失败时，不再进行后续的拦截器。而直接返回input的result
+
+

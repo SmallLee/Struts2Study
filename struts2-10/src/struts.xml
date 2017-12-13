@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="default" extends="struts-default">
+        <action name="validation" class="com.struts.validation.TestValidation" method="execute">
+            <result name="input">/index.jsp</result>
+            <result>/success.jsp</result>
+        </action>
+        <action name="validation2" class="com.struts.validation.TestValidation" method="execute">
+            <result name="input">/index2.jsp</result>
+            <result>/success.jsp</result>
+        </action>
+    </package>
+</struts>

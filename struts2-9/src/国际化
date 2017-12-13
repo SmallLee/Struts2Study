@@ -1,0 +1,20 @@
+配置国际化资源文件
+
+
+国际化资源文件加载顺序
+
+
+Struts2运行流程：
+    1.请求发送给StrutsPrepareAndExecuteFilter
+    2.StrutsPrepareAndExecuteFilter询问ActionMapper,该请求是否是一个Struts2请求(即是否返回一个非空的
+    ActionMapping对象)
+    3.若ActionMapper认为该请求是一个Struts2请求，则StrutsPrepareAndExecuteFilter把请求的处理交给ActionProxy
+    4.ActionProxy通过ConfigurationManager询问框架的配置文件，确定需要调用的Action类及Action方法
+    5.ActionProxy创建一个ActionInvocation对象，并进行初始化
+    6.ActionInvocation实例在调用Action的过程前后，涉及到相关拦截器的调用
+    7.Action执行完毕，ActionInvocation负责根据struts.xml中的配置找到对应的返回结果，调用结果的execute方法
+    渲染结果，在渲染的过程中可以使用stuts2的标签
+    8.执行各个拦截器invocation.invoke之后的代码
+    9.把结果发送到客户端
+
+
